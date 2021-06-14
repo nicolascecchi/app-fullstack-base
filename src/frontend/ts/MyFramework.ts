@@ -13,9 +13,11 @@ class MyFramework{
     }
     xlm.open("POST", url, true);
     xlm.setRequestHeader("Content-Type", "application/json");
-
-    
     xlm.send(JSON.stringify(datos));
   }
+  public editDeviceForm(id:string) {
+    
 
+  }
 }
+

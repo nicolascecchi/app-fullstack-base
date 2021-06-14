@@ -28,12 +28,14 @@
                     </div>
                     <div class="col l2 s12 m6">
                     <a id="btnCerrar" class="waves-effect waves-light btn">Cerrar</a>
+                    </div>
                 </div>
-                <div class="col l8 s12 m12">
-                    <p id="lista"></p>
-                    <ul id="listaDisp" class="collection">
-                        
-                    </ul>
+                <div class="row">
+                    <div class="col l8 s12 m12">
+                        <p id="lista"></p>
+                        <ul id="listaDisp" class="collection">
+                        </ul>
+                    </div>
                 </div>
                     <div class="input-field col s12 m12 l12 xl12">
                         <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
@@ -41,6 +43,12 @@
                     <div class="col s4 m4 l2 xl2">
                         <button class="btn waves-effect waves-light button-view" onclick="SayHello();" name="hello_button">PRESS ME</button>
                     </div>
+                    <div>
+                        <button type="button" onclick="asd(1)" id="insert" value="Add new Product">insert</button>
+                        <input value="Alvin" id="asd" type="text" class="validate">
+                        <!-- <label class="active" for="asd">First Name</label> --> 
+                    </div>
+                   
                 </div>
             </div>	
         </main>
@@ -69,5 +77,19 @@
 
 		<script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/user.js"></script>
+        <script type="text/javascript">
+            window.onload = function() {
+                    document.getElementById("asd").style.display = "none";
+              };
+           function asd(a) {
+            
+              if (a == 1) {
+                document.getElementById("asd").style.display = "block";
+              } else {
+                document.getElementById("asd").style.display = "none";
+              }
+                
+            }
+          </script>
     </body>
   </html>

@@ -5,6 +5,7 @@ class Main implements EventListenerObject, HandlerPost{
         this.myFramework = new MyFramework();
       
     }
+
     public mostrarLista() {
         let listaUsr: Array<User> = new Array<User>();
 
@@ -21,10 +22,9 @@ class Main implements EventListenerObject, HandlerPost{
             listaUsr[obj].printInfo();
         }
     }
-    public handleEvent(ev: Event) {
 
+    public handleEvent(ev: Event) {
         let objetoClick: HTMLElement = <HTMLElement>ev.target;
-        
         // Acción del botón "Listar"
         if (objetoClick.textContent == "Listar") {
             let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -65,18 +65,17 @@ class Main implements EventListenerObject, HandlerPost{
                         }
                         for (let disp of listaDis) {
                             let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-edit");
-                            editDisp.addEventListener("click", ()=>{alert("Agregamos el click al boton edit")});
+                            editDisp.addEventListener("click", this);
+                            console.log(editDisp);
                         }
 
                         for (let disp of listaDis) {
-                            let checkDisp = this.myFramework.getElementById("disp-" + disp.id +"-switch");
+                            let checkDisp = this.myFramework.getElementById("disp-" + disp.id +"-state");
                             checkDisp.addEventListener("click", this);
+                            console.log(checkDisp);
                         }
                     } 
-                    else if (objetoClick.classList.contains("boton-edit"))
-                    {
-                        alert("Se hizo click en un boton edit");
-                    } else {
+                     else {
                         alert("error!!");
                         }
                 }
@@ -85,16 +84,22 @@ class Main implements EventListenerObject, HandlerPost{
             xhr.send();
             //console.log("Ya hice el request!!")
 
-        } else {         
+        } else if (objetoClick.id.match(/disp-\d+-state/)){         
             let checkBox: HTMLInputElement = <HTMLInputElement>ev.target;
-            alert(checkBox.id + " - " + checkBox.checked);
-
-            let datos = {"id":checkBox.id,"status":checkBox.checked}
+            console.log(checkBox.id + " - " + checkBox.checked);
+            let datos = {"id":checkBox.id,"status":checkBox.checked};
             this.myFramework.requestPOST("http://localhost:8000/devices", this,datos);
+            
+        }else if (objetoClick.id.match(/disp-\d+-boton-edit/)){
+            //let element_to_edit: HTMLElement= this.myFramework.getElementById();
+            this.myFramework.editDeviceForm(objetoClick.id);
 
+        }       
+        else{
+            console.log("Algo salió mal")
         }
     }
-
+    
     responsePost(status: number, response: string) {
         alert(response);
     }
@@ -105,10 +110,12 @@ window.addEventListener("load", ()=> {
     let miObjMain: Main = new Main();
     miObjMain.main();
 
+    //Cambia el texto del botón. No aporta funcionalidades.
     let boton:HTMLElement = miObjMain.myFramework.getElementById("boton");
     boton.textContent = "Listar";
     boton.addEventListener("click", miObjMain);
     
+
     let btnCerrar: HTMLElement = miObjMain.myFramework.getElementById("btnCerrar");
     btnCerrar.addEventListener("dblclick", miObjMain);
     
