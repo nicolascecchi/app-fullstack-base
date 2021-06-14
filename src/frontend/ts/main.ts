@@ -23,20 +23,18 @@ class Main implements EventListenerObject, HandlerPost{
     }
     public handleEvent(ev: Event) {
 
-        alert("Se hizo click!");
-    
-
         let objetoClick: HTMLElement = <HTMLElement>ev.target;
         
+        // Acción del botón "Listar"
         if (objetoClick.textContent == "Listar") {
-            
             let xhr: XMLHttpRequest = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        console.log("Llego la respuesta!!!!");
-                        console.log(xhr.responseText);
+                        //console.log("Llego la respuesta!!!!");
+                        //console.log(xhr.responseText);
 
+                        // Llega la respuesta con todos los elementos
                         let listaDis: Array<Device> = JSON.parse(xhr.responseText);
                         
                         for (let disp of listaDis ){
@@ -44,22 +42,26 @@ class Main implements EventListenerObject, HandlerPost{
                             let listaDisp = this.myFramework.getElementById("listaDisp");
                             listaDisp.innerHTML += `<li class="collection-item avatar">
                             <img src="./static/images/lightbulb.png" alt="" class="circle">
-                            <span class="nombreDisp">${disp.name}</span>
-                            <p>${disp.description}
+                            <span class="nombreDisp">${disp.name} 
+                                <a id = "disp-${disp.id}-edit" class="btn-floating btn-small waves-effect waves-light">
+                                    <i class="material-icons">edit</i></a>
+                            </span>
+                            <p>
+                                ${disp.description}
                             </p>
+                                                     
                             <a href="#!" class="secondary-content">
                                 <div class="switch">
-                                    <label >
+                                    <label>
                                       Off
-                                      <input id="disp_${disp.id}" type="checkbox">
+                                      <input id="disp-${disp.id}-state" type="checkbox">
                                       <span class="lever"></span>
                                       On
                                     </label>
                                   </div>
                             </a>
                           </li>`;
-                         
-                            
+                                                     
                         }
 
                         for (let disp of listaDis) {
@@ -73,7 +75,7 @@ class Main implements EventListenerObject, HandlerPost{
             }
             xhr.open("GET","http://localhost:8000/devices",true)
             xhr.send();
-            console.log("Ya hice el request!!")
+            //console.log("Ya hice el request!!")
 
         } else {         
             let checkBox: HTMLInputElement = <HTMLInputElement>ev.target;
