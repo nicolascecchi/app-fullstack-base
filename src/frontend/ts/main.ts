@@ -43,7 +43,7 @@ class Main implements EventListenerObject, HandlerPost{
                             listaDisp.innerHTML += `<li class="collection-item avatar">
                             <img src="./static/images/lightbulb.png" alt="" class="circle">
                             <span class="nombreDisp">${disp.name} 
-                                <a id = "disp-${disp.id}-edit" class="btn-floating btn-small waves-effect waves-light">
+                                <a id = "disp-${disp.id}-boton-edit" class="btn-floating btn-small waves-effect waves-light boton-edit" >
                                     <i class="material-icons">edit</i></a>
                             </span>
                             <p>
@@ -63,14 +63,22 @@ class Main implements EventListenerObject, HandlerPost{
                           </li>`;
                                                      
                         }
+                        for (let disp of listaDis) {
+                            let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-edit");
+                            editDisp.addEventListener("click", ()=>{alert("Agregamos el click al boton edit")});
+                        }
 
                         for (let disp of listaDis) {
-                            let checkDisp = this.myFramework.getElementById("disp_" + disp.id);
+                            let checkDisp = this.myFramework.getElementById("disp-" + disp.id +"-switch");
                             checkDisp.addEventListener("click", this);
                         }
+                    } 
+                    else if (objetoClick.classList.contains("boton-edit"))
+                    {
+                        alert("Se hizo click en un boton edit");
                     } else {
-                        alert("error!!")
-                    }
+                        alert("error!!");
+                        }
                 }
             }
             xhr.open("GET","http://localhost:8000/devices",true)
@@ -96,6 +104,7 @@ class Main implements EventListenerObject, HandlerPost{
 window.addEventListener("load", ()=> {
     let miObjMain: Main = new Main();
     miObjMain.main();
+
     let boton:HTMLElement = miObjMain.myFramework.getElementById("boton");
     boton.textContent = "Listar";
     boton.addEventListener("click", miObjMain);
@@ -104,6 +113,7 @@ window.addEventListener("load", ()=> {
     btnCerrar.addEventListener("dblclick", miObjMain);
     
 });
+
 
 
 
