@@ -17,7 +17,12 @@ class MyFramework{
   }
   public editDeviceForm(id:string) {
     
-
   }
+  
+  public clickOnEdit(){
+    console.log("se pico");
+  }
+
+
 }
 

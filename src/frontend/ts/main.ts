@@ -41,7 +41,7 @@ class Main implements EventListenerObject, HandlerPost{
                         }
                         for (let disp of listaDis) {
                             let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-edit");
-                            editDisp.addEventListener("click", this);
+                            editDisp.addEventListener("click",this.myFramework.clickOnEdit);
                             console.log(editDisp);
                         }
 
@@ -80,16 +80,16 @@ class Main implements EventListenerObject, HandlerPost{
     public handleEvent(ev: Event) {
         let objetoClick: HTMLElement = <HTMLElement>ev.target;
         // Acción del botón "Listar"
-        if (objetoClick.id.match(/disp-\d+-state/)){         
+        if (objetoClick.id.match(/disp-\d+-status/)){         
             let checkBox: HTMLInputElement = <HTMLInputElement>ev.target;
             console.log(checkBox.id + " - " + checkBox.checked);
             let datos = {"id":checkBox.id,"status":checkBox.checked};
-            this.myFramework.requestPOST("http://localhost:8000/devices", this,datos);
+            this.myFramework.requestPOST("http://localhost:8000/devices",this,datos);
             
         }else if (objetoClick.id.match(/disp-\d+-boton-edit/)){
             //let element_to_edit: HTMLElement= this.myFramework.getElementById();
-            this.myFramework.editDeviceForm(objetoClick.id);
-
+            //this.myFramework.editDeviceForm(objetoClick.id);
+            console.log("boton de edit");
         }       
         else{
             console.log("Algo salió mal")
@@ -99,25 +99,19 @@ class Main implements EventListenerObject, HandlerPost{
     responsePost(status: number, response: string) {
         alert(response);
     }
-
-    
 }
+
 window.addEventListener("load", ()=> {
     let miObjMain: Main = new Main();
     miObjMain.main();
 
     //Cambia el texto del botón. No aporta funcionalidades.
-    let boton:HTMLElement = miObjMain.myFramework.getElementById("boton");
-    boton.textContent = "Listar";
-    boton.addEventListener("click", miObjMain);
+    let addNewDisp:HTMLElement = miObjMain.myFramework.getElementById("btn-new-disp");
+    addNewDisp.addEventListener("click", ()=>{console.log("funcion no implementada")});
     
+    let switchAllDisp: HTMLElement = miObjMain.myFramework.getElementById("btn-all-devices");
+    switchAllDisp.addEventListener("dblclick", ()=>{console.log("funcion no implementada")});
 
-    let btnCerrar: HTMLElement = miObjMain.myFramework.getElementById("btnCerrar");
-    btnCerrar.addEventListener("dblclick", miObjMain);
-    
 });
-
-
-
 
 
