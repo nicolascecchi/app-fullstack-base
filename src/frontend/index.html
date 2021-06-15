@@ -18,7 +18,7 @@
                 </div>
             </nav>	
             <!-- Page Body -->
-            <div class="container">
+            <div class="container">                        
                 <br/>
                 <h3>Administrador de dispositivos</h3>
                 <br/>
@@ -29,7 +29,48 @@
                     <div class="col l6 s12 m6">
                     <a id="btn-all-devices" class="waves-effect waves-light btn">Apagar todo</a>
                     </div>
-                </div>
+                    <!-- -->
+                      <!-- Modal Trigger -->
+                    <button id="agregar-disp" class="waves-effect waves-light btn modal-trigger" data-target="modal1">Modal</button>
+
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                        <h4>Add an Image</h4>
+
+                        <div class="row">
+                            <form class="col s12">
+                            <div class="row modal-form-row">
+                                <div class="input-field col s12">
+                                <input id="image_url" type="text" class="validate">
+                                <label for="image_url">Image URL</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <input id="image_title" type="text" class="validate">
+                                <label for="image_title">Title</label>
+                                </div>
+                            </div>       
+                            <div class="row">
+                                <div class="input-field col s12">
+                                <textarea id="image_description" type="text" class="materialize-textarea validate"></textarea>
+                                <label for="image_description">Description</label>
+                                </div>
+                            </div>             
+                            </form>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <a class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+                        </div>
+                    </div>
+                    <!-- -->
+
+                </div> 
+                <!-- Cierra fila de botones superiores a la lista-->
+
+                <!-- Comienza la lista de dispositivos           -->
                 <div class="row">
                     <div class="col l8 s12 m12">
                         <p id="lista"></p>
@@ -37,15 +78,11 @@
                         </ul>
                     </div>
                 </div>
-                    <div class="input-field col s12 m12 l12 xl12">
-                        <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
-                    </div>
-                    <div>
-                        <button type="button" onclick="asd(1)" id="insert" value="Add new Product">insert</button>
-                        <input value="Alvin" id="asd" type="text" class="validate">
-                    </div>
-                   
+                <div class="input-field col s12 m12 l12 xl12">
+                    <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
                 </div>
+                   
+            </div>
             </div>	
         </main>
 		<!-- Page Footer -->
@@ -70,22 +107,9 @@
 		<!--JavaScript at end of body for optimized loading-->
 		<script type="text/javascript" src="./static/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/MyFramework.js"></script>
-
 		<script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/user.js"></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                    document.getElementById("asd").style.display = "none";
-              };
-           function asd(a) {
-            
-              if (a == 1) {
-                document.getElementById("asd").style.display = "block";
-              } else {
-                document.getElementById("asd").style.display = "none";
-              }
-                
-            }
-          </script>
+
+        
     </body>
   </html>

@@ -1,7 +1,6 @@
 class Main implements EventListenerObject, HandlerPost{
     public myFramework: MyFramework;
     public main(): void {
-        console.log("Se ejecuto el metodo main!!!");
         this.myFramework = new MyFramework();
         let xhr: XMLHttpRequest = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
@@ -56,7 +55,7 @@ class Main implements EventListenerObject, HandlerPost{
                         }
                 }
             }
-            xhr.open("GET","http://localhost:8000/devices",true)
+            xhr.open("GET","http://localhost:8000/devices",true);
             xhr.send();      
     }
 
@@ -80,7 +79,7 @@ class Main implements EventListenerObject, HandlerPost{
     public handleEvent(ev: Event) {
         let objetoClick: HTMLElement = <HTMLElement>ev.target;
         // Acción del botón "Listar"
-        if (objetoClick.id.match(/disp-\d+-status/)){         
+        if (objetoClick.id.match(/disp-\d+-state/)){         
             let checkBox: HTMLInputElement = <HTMLInputElement>ev.target;
             console.log(checkBox.id + " - " + checkBox.checked);
             let datos = {"id":checkBox.id,"status":checkBox.checked};
@@ -106,8 +105,8 @@ window.addEventListener("load", ()=> {
     miObjMain.main();
 
     //Cambia el texto del botón. No aporta funcionalidades.
-    let addNewDisp:HTMLElement = miObjMain.myFramework.getElementById("btn-new-disp");
-    addNewDisp.addEventListener("click", ()=>{console.log("funcion no implementada")});
+    let addNewDisp:HTMLElement = miObjMain.myFramework.getElementById("agregar-disp");
+    addNewDisp.addEventListener("click", miObjMain.myFramework.newDevice);
     
     let switchAllDisp: HTMLElement = miObjMain.myFramework.getElementById("btn-all-devices");
     switchAllDisp.addEventListener("dblclick", ()=>{console.log("funcion no implementada")});

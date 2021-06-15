@@ -18,11 +18,26 @@ class MyFramework{
   public editDeviceForm(id:string) {
     
   }
-  
+
   public clickOnEdit(){
     console.log("se pico");
   }
 
+  public newDevice(){
+    console.log("Esto se ejecutó en modal");
+    // Get the modal
+    var modal = document.getElementById("modal1");
+    // Get the button that opens the modal
+    var btn = document.getElementById("agregar-disp");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on the button, open the modal
+    modal.style.display = "block";
 
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
 }
-
