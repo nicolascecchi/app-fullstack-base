@@ -23,54 +23,77 @@
                 <h3>Administrador de dispositivos</h3>
                 <br/>
                 <div class="row">
-                    <div class="col l2 s12 m6">
-                    <a id="btn-new-disp" class="waves-effect waves-light btn">Nuevo</a>
+                    <div class="col l4 s12 m6">
+                     <!-- Modal Trigger Agregar dispositivo -->
+                    <a id="btn-agregar-disp" class="waves-effect waves-light btn agregar-disp" href="#modal1">
+                        <i class="material-icons right">add</i>Agregar Dispositivo</a>
                     </div>
-                    <div class="col l6 s12 m6">
-                    <a id="btn-all-devices" class="waves-effect waves-light btn">Apagar todo</a>
+                    <!-- Switch todos los dispositivos-->
+                    <div class="col l4 s12 m6">
+                        <a id="btn-all-devices" class="waves-effect waves-light btn right">Apagar todo</a>
                     </div>
-                    <!-- -->
-                      <!-- Modal Trigger -->
-                    <button id="agregar-disp" class="waves-effect waves-light btn modal-trigger" data-target="modal1">Modal</button>
-
-                    <!-- Modal Structure -->
-                    <div id="modal1" class="modal">
-                        <div class="modal-content">
-                        <h4>Add an Image</h4>
-
-                        <div class="row">
-                            <form class="col s12">
-                            <div class="row modal-form-row">
-                                <div class="input-field col s12">
-                                <input id="image_url" type="text" class="validate">
-                                <label for="image_url">Image URL</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                <input id="image_title" type="text" class="validate">
-                                <label for="image_title">Title</label>
-                                </div>
-                            </div>       
-                            <div class="row">
-                                <div class="input-field col s12">
-                                <textarea id="image_description" type="text" class="materialize-textarea validate"></textarea>
-                                <label for="image_description">Description</label>
-                                </div>
-                            </div>             
-                            </form>
-                        </div>
-                        </div>
-                        <div class="modal-footer">
-                        <a class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-                        </div>
-                    </div>
-                    <!-- -->
-
                 </div> 
-                <!-- Cierra fila de botones superiores a la lista-->
+                <!-- Fin de la primera fila de botones-->
 
-                <!-- Comienza la lista de dispositivos           -->
+                <!-- Modal para preguntar si eliminar un dispositivo-->
+                <div id="modal-eliminar" class="modal">
+                    <div class="modal-content">
+                        <p>¿Confirma eliminar este dispositivo?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="confirma-eliminar" class="waves-effect waves-light btn">Confirmar</a>
+                        <a id="cancela-eliminar" class="waves-effect waves-light btn">Cancelar</a>
+                    </div>
+                </div>
+
+
+                <!-- Modal Structure para agregar nuevo dispositivo -->
+                <div id="modal-new-device" class="modal">
+                    <div class="modal-content">
+                        <h5>Agregar nuevo dispositivo</h5>
+                        <div class="row">
+                            <!-- Comienza formulario -->
+                            <form class="col s12">
+                                <div class="row">     
+                                    <p>
+                                        <label>
+                                            <input name="group1" type="radio" checked />
+                                            <span>Iluminación</span>
+                                        </label>
+                                        <label>
+                                            <input name="group1" type="radio" />
+                                            <span>Persiana</span>
+                                            </label>
+                                    </p>
+                                </div>                            
+                                <div class="row">
+                                    <div class="input-field col s10">
+                                        <input placeholder="Ej. Lámpara 1" id="name" type="text" class="validate">
+                                        <label for="name">Nombre del dispositivo</label>
+                                    </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="input-field col s10">
+                                        <input placeholder="Ej. Lámpara Cocina" id="description" type="text" class="validate">
+                                        <label for="name">Descripción del dispositivo</label>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Fin del formulario -->
+                        </div>
+                    </div>
+                    <!-- Botones Enviar/Cancelar del Modal-->
+                    <div class="row">
+                        <div class="modal-footer">
+                            <a id= "cancelar-nuevo-disp" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+                            <button class="btn waves-effect green" type="submit" name="action">Enviar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin de la estructura del modal-->
+                <!-- Comienza la lista de dispositivos-->
                 <div class="row">
                     <div class="col l8 s12 m12">
                         <p id="lista"></p>

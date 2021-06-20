@@ -18,8 +18,8 @@ class Main implements EventListenerObject, HandlerPost{
                             listaDisp.innerHTML += `<li class="collection-item avatar">
                             <img src="./static/images/lightbulb.png" alt="" class="circle">
                             <span class="nombreDisp">${disp.name} 
-                                <a id = "disp-${disp.id}-boton-edit" class="btn-floating btn-small waves-effect waves-light boton-edit" >
-                                    <i class="material-icons">edit</i></a>
+                                <a id = "disp-${disp.id}-boton-delete" class="btn-floating btn-small waves-effect waves-red btn-delete-device" href="#modal-eliminar">
+                                    <i class="small material-icons">delete</i></a>
                             </span>
                             <p>
                                 ${disp.description}
@@ -39,7 +39,7 @@ class Main implements EventListenerObject, HandlerPost{
                                                      
                         }
                         for (let disp of listaDis) {
-                            let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-edit");
+                            let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-delete");
                             editDisp.addEventListener("click",this.myFramework.clickOnEdit);
                             console.log(editDisp);
                         }
@@ -104,13 +104,23 @@ window.addEventListener("load", ()=> {
     let miObjMain: Main = new Main();
     miObjMain.main();
 
-    //Cambia el texto del botón. No aporta funcionalidades.
-    let addNewDisp:HTMLElement = miObjMain.myFramework.getElementById("agregar-disp");
-    addNewDisp.addEventListener("click", miObjMain.myFramework.newDevice);
+    // Agrega el event listener para agregar nuevos dispositivos
+    let addNewDisp:HTMLElement = miObjMain.myFramework.getElementById("btn-agregar-disp");
+    addNewDisp.addEventListener("click", miObjMain.myFramework.newDeviceForm);
+
+    // Agrega events listeners a los botones de eliminar dispositivos
+    let deleteDispButtons:HTMLCollection = miObjMain.myFramework.getElementsByClassName("btn-delete-device");
+    for (let btn_delete of deleteDispButtons){
+        console.log(btn_delete);
+        btn_delete.addEventListener("click", miObjMain.myFramework.deleteDeviceConfirmation);
+    }
     
     let switchAllDisp: HTMLElement = miObjMain.myFramework.getElementById("btn-all-devices");
     switchAllDisp.addEventListener("dblclick", ()=>{console.log("funcion no implementada")});
 
 });
 
-
+//document.addEventListener('DOMContentLoaded', function() {
+//    var elems = document.getElementById('new-device-select');
+//    var instances = M.FormSelect.init(elems, options);
+//  });

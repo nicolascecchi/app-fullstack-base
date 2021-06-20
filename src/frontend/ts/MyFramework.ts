@@ -1,4 +1,9 @@
 class MyFramework{
+
+  public getElementsByClassName(classname:string): HTMLCollection{
+    return document.getElementsByClassName(classname);
+  }
+
   public getElementById(id:string): HTMLElement{
     return document.getElementById(id);
   }
@@ -23,12 +28,30 @@ class MyFramework{
     console.log("se pico");
   }
 
-  public newDevice(){
+  public newDeviceForm(){
     console.log("Esto se ejecutó en modal");
     // Get the modal
-    var modal = document.getElementById("modal1");
+    var modal = document.getElementById("modal-new-device");
     // Get the button that opens the modal
     var btn = document.getElementById("agregar-disp");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on the button, open the modal
+    modal.style.display = "block";
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+
+  public deleteDeviceConfirmation(){
+    console.log("Esto se ejecutó en modal");
+    // Get the modal
+    var modal = document.getElementById("modal-eliminar");
+    // Get the button that opens the modal
+    var btn_confirma = document.getElementById("confirma-eliminar");
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     // When the user clicks on the button, open the modal
