@@ -24,10 +24,6 @@ class MyFramework{
     
   }
 
-  public clickOnEdit(){
-    console.log("se pico");
-  }
-
   public newDeviceForm(){
     console.log("Esto se ejecutó en modal");
     // Get the modal
@@ -47,11 +43,11 @@ class MyFramework{
   }
 
   public deleteDeviceConfirmation(){
-    console.log("Esto se ejecutó en modal");
+    console.log("Ejecución modal eliminar");
     // Get the modal
     var modal = document.getElementById("modal-eliminar");
     // Get the button that opens the modal
-    var btn_confirma = document.getElementById("confirma-eliminar");
+    // var btn_eliminar = document.getElementById("confirma-eliminar");
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     // When the user clicks on the button, open the modal

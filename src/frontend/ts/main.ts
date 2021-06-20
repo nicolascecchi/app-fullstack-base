@@ -40,7 +40,7 @@ class Main implements EventListenerObject, HandlerPost{
                         }
                         for (let disp of listaDis) {
                             let editDisp = this.myFramework.getElementById("disp-" + disp.id +"-boton-delete");
-                            editDisp.addEventListener("click",this.myFramework.clickOnEdit);
+                            editDisp.addEventListener("click",this.myFramework.deleteDeviceConfirmation);
                             console.log(editDisp);
                         }
 
@@ -109,11 +109,11 @@ window.addEventListener("load", ()=> {
     addNewDisp.addEventListener("click", miObjMain.myFramework.newDeviceForm);
 
     // Agrega events listeners a los botones de eliminar dispositivos
-    let deleteDispButtons:HTMLCollection = miObjMain.myFramework.getElementsByClassName("btn-delete-device");
-    for (let btn_delete of deleteDispButtons){
-        console.log(btn_delete);
-        btn_delete.addEventListener("click", miObjMain.myFramework.deleteDeviceConfirmation);
-    }
+    //let deleteDispButtons:HTMLCollection = miObjMain.myFramework.getElementsByClassName("btn-delete-device");
+    //for (let btn_delete of deleteDispButtons){
+     //   console.log(btn_delete);
+     //   btn_delete.addEventListener("click", miObjMain.myFramework.deleteDeviceConfirmation);
+    //}
     
     let switchAllDisp: HTMLElement = miObjMain.myFramework.getElementById("btn-all-devices");
     switchAllDisp.addEventListener("dblclick", ()=>{console.log("funcion no implementada")});
