@@ -1,4 +1,8 @@
-class MyFramework{
+class MyFramework implements HandlerPost{
+
+  public responsePost(status: number, response: string) {
+    alert(response);
+  }
 
   public getElementsByClassName(classname:string): HTMLCollection{
     return document.getElementsByClassName(classname);
@@ -6,6 +10,10 @@ class MyFramework{
 
   public getElementById(id:string): HTMLElement{
     return document.getElementById(id);
+  }
+
+  public noHaceNada(){
+    console.log("No hace nada");
   }
 
   public requestPOST(url: string, response: HandlerPost, datos: any) {
@@ -20,10 +28,10 @@ class MyFramework{
     xlm.setRequestHeader("Content-Type", "application/json");
     xlm.send(JSON.stringify(datos));
   }
-  public editDeviceForm(id:string) {
-    
-  }
 
+  public editDeviceForm(id:string) {
+  }
+ 
   public newDeviceForm(){
     console.log("Esto se ejecutó en modal");
     // Get the modal
@@ -42,21 +50,17 @@ class MyFramework{
     }
   }
 
-  public deleteDeviceConfirmation(){
-    console.log("Ejecución modal eliminar");
-    // Get the modal
-    var modal = document.getElementById("modal-eliminar");
-    // Get the button that opens the modal
-    // var btn_eliminar = document.getElementById("confirma-eliminar");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on the button, open the modal
-    modal.style.display = "block";
 
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+
+
+
+
+
+  public closeModal(modal:HTMLElement){
+    modal.style.display= "none";
   }
+
+
+
+
 }
