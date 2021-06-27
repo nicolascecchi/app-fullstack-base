@@ -44,7 +44,7 @@ app.post('/devices/', function(req, res) {
 app.post('/devices/delete/', function(req,res){
     let datosFiltrados = datos.filter(item => item.id != req.body.id);
     datos = datosFiltrados;
-    res.send("eliminado")
+    res.send("backend-ok")
 
 });
 
@@ -68,8 +68,26 @@ app.post('/devices/add/', function(req,res){
                  "description":req.body.description,
                  "state":req.body.state
                     })
-    res.send('agregado')
+    res.send('backend-ok')
 })
+
+app.post('/devices/edit/', function(req,res){
+    let datosFiltrados = datos.filter(item => item.id == req.body.id);
+    if (datosFiltrados.length > 0) {
+        datosFiltrados[0].name = req.body.name;
+        datosFiltrados[0].description = req.body.description;
+    }
+    // Agrega el nuevo dispositivo al JSON datos
+    res.send('backend-ok')
+})
+
+app.post('/devices/all', function(req,res){
+    datos.forEach(element => {
+        element.state = req.body.state;
+    });
+    res.send('backend-ok')
+})
+
 
 //=======[ Main module code ]==================================================
 app.listen(PORT, function(req, res) {

@@ -12,17 +12,19 @@ main {
     z-index: 2;
 }
 
-.colorFondo{
+.header-footer{
     background-color: rgb(52, 8, 109);
-       
 }
+
 .nombreDisp{
     font-size: 25px;
     color: rgb(161, 48, 48);
 }
-/*.agregar-disp{
-  background-color: rgb(47, 180, 47);
-}*/
+
+.btn-edit-device:hover{
+  background-color: rgba(38, 128, 207, 0.877);
+}
+
 .btn-delete-device:hover{
   background-color: #ff3527ce;
 }

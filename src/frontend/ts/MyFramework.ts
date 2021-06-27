@@ -1,8 +1,4 @@
-class MyFramework implements HandlerPost{
-
-  public responsePost(status: number, response: string) {
-    alert(response);
-  }
+class MyFramework {
 
   public getElementsByClassName(classname:string): HTMLCollection{
     return document.getElementsByClassName(classname);

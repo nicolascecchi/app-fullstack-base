@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="static/css/styles.css"  media="screen,projection"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
+    <title>Administrar dispositivos</title>
     <body>
         <main>
             <!-- Navigation bar -->
-            <nav class="colorFondo" >
+            <nav class="header-footer" >
                 <div class="nav-wrapper">
                     <a href="#!" class="brand-logo left" style="margin-left: 15px;">Smart Home</a>
                     <ul id="nav-mobile" class="right" style="margin-right: 15px;">
@@ -23,32 +24,22 @@
                     <h3>Administrador de dispositivos</h3>
                 <br/>
                 <div class="row">
-                    <div class="col l4 s12 m6">
+                    <div class="col l2 s3 m3">
                      <!-- Modal Trigger Agregar dispositivo -->
-                    <a id="btn-agregar-disp" class="waves-effect waves-light btn">
-                        <i id="btn-agregar-disp" class="material-icons right">add</i>Agregar Dispositivo</a>
+                        <a id="btn-agregar-disp" class="waves-effect waves-light btn tooltipped" data-position="bottom" data-tooltip="Agregar nuevo dispositivo">
+                        <i id="btn-agregar-disp" class="material-icons right">add</i>Agregar</a>
                     </div>
-                    <!-- Switch todos los dispositivos
-                    <div class="col l4 s12 m6">
-                        <a id="btn-apagar-todo" class="waves-effect waves-light btn right">Apagar todo</a>
-                    </div>-->
+                    <!-- Botones de apagar/encender todo -->
+                    <div class="col l3 s2 m2">
+                        <!-- Apagar todo  -->
+                        <a class="btn-alldev btn-floating btn-medium waves-effect waves-light tooltipped red" data-position="bottom" data-tooltip="Apagar todo">
+                        <i id="btn-alldev-off" class="btn-alldev medium material-icons">power_settings_new</i></a>
+                        <!-- Encender todo  -->
+                        <a class="btn-alldev btn-floating btn-medium waves-effect waves-light tooltipped blue" data-position="bottom" data-tooltip="Encender todo">
+                        <i id="btn-alldev-on" class="btn-alldev medium material-icons">power_settings_new</i></a>
+                    </div>
                 </div> 
                 <!-- Fin de la primera fila de botones-->
-                
-                <!-- Modal de ayuda -->
-                <div id="modal-help" class="modal">
-                    <div class="modal-content">
-                        <h3>Ayuda</h3>
-                    </div>
-                    <div>
-
-                    </div>
-                
-                    <div class="modal-footer">
-                        <a id="cancelar-help" class="waves-effect waves-light btn">Cerrar</a>
-                    </div>
-                </div> 
-                <!-- Fin modal de ayuda -->
 
                 <!-- Modal para eliminar un dispositivo-->
                 <div id="modal-eliminar" class="modal modal-delete-device">
@@ -99,12 +90,40 @@
                     <!-- Botones Enviar/Cancelar del Modal-->
                     <div class="row">
                         <div class="modal-footer">
-                            <!--<a id= "cancelar-addDev" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
-                            <button class="btn waves-effect green" type="submit" id="btn-confirm-addDev">Enviar
-                                <i class="material-icons right">send</i>
-                            </button> -->
                             <a id="cancelar-addDev" class="waves-effect waves-light btn btn-cancelar">Cancelar</a>
                             <a id="btn-confirm-addDev" class="waves-effect waves-light btn btn-confirmar">Confirmar</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin de la estructura del modal-->
+
+                <!-- Modal para agregar nuevo dispositivo -->
+                <div id="modal-edit-device" class="modal">
+                    <div class="modal-content">
+                        <h5>Editar dispositivo</h5>
+                        <div class="row">
+                            <!-- Comienza formulario -->                          
+                                <div class="row">
+                                    <div class="input-field col s10">
+                                        <input placeholder="Ej. Lámpara 1" id="edit-dev-name" type="text" class="validate">
+                                        <label for="name">Nombre</label>
+                                    </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="input-field col s10">
+                                        <input placeholder="Ej. Lámpara Cocina" id="edit-description" type="text" class="validate">
+                                        <label for="description">Descripción</label>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Fin del formulario -->
+                        </div>
+                    </div>
+                    <!-- Botones Enviar/Cancelar del Modal-->
+                    <div class="row">
+                        <div class="modal-footer">
+                            <a id="cancelar-edit" class="waves-effect waves-light btn btn-cancelar">Cancelar</a>
+                            <a id="btn-confirm-edit" class="waves-effect waves-light btn btn-confirmar">Confirmar</a>
                         </div>
                     </div>
                 </div>
@@ -115,18 +134,19 @@
                     <div class="col l8 s12 m12">
                         <p id="lista"></p>
                         <ul id="listaDisp" class="collection">
+
                         </ul>
                     </div>
                 </div>
                 <div class="input-field col s12 m12 l12 xl12">
                     <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
-                </div>
-                   
+                </div> 
             </div>
-            </div>	
+
+                    
         </main>
 		<!-- Page Footer -->
-        <footer class="page-footer colorFondo" >
+        <footer class="page-footer header-footer" >
             <div class="container">
                 <div class="row">
                     <div class="col l6 s6">
@@ -152,4 +172,4 @@
 
         
     </body>
-  </html>
+</html>

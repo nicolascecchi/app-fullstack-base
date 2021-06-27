@@ -1,3 +1,4 @@
+declare const M;
 class Main implements EventListenerObject, HandlerPost{ 
     public mf: MyFramework;
     constructor(){
@@ -27,13 +28,18 @@ class Main implements EventListenerObject, HandlerPost{
                             let listaDisp = this.mf.getElementById("listaDisp");
                             listaDisp.innerHTML += `<li class="collection-item avatar">
                             <img src="./static/images/${icono}.png" alt="" class="circle">
-                            <span class="nombreDisp">${disp.name} 
-                                <a id = "btn-del-${disp.id}" class="btn-floating btn-small waves-effect waves-red btn-delete-device">
+                            <span class="nombreDisp">
+                                ${disp.name} 
+                                <a id = "btn-edit-${disp.id}" class="btn-floating btn-small waves-effect waves-blue btn-edit-device tooltipped" data-position="bottom" data-tooltip="Editar">
+                                <i id ="edit-${disp.id}" class="small material-icons">edit</i></a>
+
+                                <a id = "btn-del-${disp.id}" class="btn-floating btn-small waves-effect waves-red btn-delete-device tooltipped" data-position="bottom" data-tooltip="Eliminar">
                                 <i id ="delete-${disp.id}" class="small material-icons">delete</i></a>
                             </span>
+
                             <p>
                                 ${disp.description}
-                            </p>
+                            </p>                           
                                                      
                             <a href="#!" class="secondary-content">
                                 <div class="switch">
@@ -54,9 +60,16 @@ class Main implements EventListenerObject, HandlerPost{
                         }
 
                         for (let disp of listaDis) {
+                            let delDisp = this.mf.getElementById("btn-edit-" + disp.id);
+                            delDisp.addEventListener("click",this);
+                        }                        
+
+                        for (let disp of listaDis) {
                             let checkDisp = this.mf.getElementById("disp-" + disp.id +"-state");
                             checkDisp.addEventListener("click", this);
                         }
+                        var elems = document.querySelectorAll('.tooltipped');
+                        var instances = M.Tooltip.init(elems, Option);
                     } 
                      else {
                         alert("error!!");
@@ -69,7 +82,10 @@ class Main implements EventListenerObject, HandlerPost{
             // Agrega el event listener para agregar nuevos dispositivos
         let addNewDisp:HTMLElement = this.mf.getElementById("btn-agregar-disp");
         addNewDisp.addEventListener("click", this);
-        
+    }
+    public addTooltips(){
+        var elems = document.querySelectorAll('.tooltipped');
+        var instances = M.Tooltip.init(elems, Option);
     }
 
     public handleEvent(ev: Event) {
@@ -83,10 +99,16 @@ class Main implements EventListenerObject, HandlerPost{
         // Handle para eliminar dispositivo
         }else if (objetoClick.id.split("-")[0] == "delete"){
             this.delDevConfirm(ev=ev);
-        
+
+        }else if (objetoClick.id.split("-")[0] == "edit"){
+            this.editDevConfirm(ev=ev);
+
         // Handle para agregar nuevo dispositivo
         }else if(objetoClick.id == "btn-agregar-disp"){
             this.newDeviceForm(ev=ev)
+
+        }else if(objetoClick.classList.contains("btn-alldev")){
+            this.allDevState(ev=ev);
 
         // Handle error en el evento
         }else{
@@ -95,6 +117,56 @@ class Main implements EventListenerObject, HandlerPost{
             window.location.replace("http://localhost:8000/");
         }
     }
+
+    public allDevState(ev:Event){
+        var on_off = ev.target["id"].split('-')[2];
+        if (on_off == "off"){
+            let state = {"state":"0"} 
+            this.mf.requestPOST("/devices/all",this,state)
+        }else if (on_off == "on"){
+            console.log(on_off)
+            let state = {"state":"1"} 
+            this.mf.requestPOST("/devices/all",this,state)
+        }else{
+            console.log("Error")
+        }
+    }
+
+
+    public editDevConfirm(ev:Event){
+        // Conjunto de operaciones para agregar un nuevo dispositivo
+        var id = ev.target["id"].split("-")[1];
+        // Objeto Modal, para editar dispositivo
+        var modal = document.getElementById("modal-edit-device");
+
+        // Campos del formulario
+        var nameField: HTMLInputElement = <HTMLInputElement> this.mf.getElementById("edit-dev-name");
+        var descField: HTMLInputElement = <HTMLInputElement> this.mf.getElementById("edit-description");
+
+        // Botón de cancelar para cerrar la operación
+        var cancel = document.getElementById("cancelar-edit");
+        // Cierra el modal y resetea los campos
+        cancel.addEventListener("click", ()=>{modal.style.display= "none";
+                                            nameField.value = "";
+                                            descField.value = "";
+        })
+        
+        // Post para editar el dispositivo
+        var editDevHandler= (ev:Event)=>{
+            let devName:string = nameField.value;
+            let devDesc:string = descField.value;
+            let newInfo = {"id":id,"name":devName, "description":devDesc}
+            this.mf.requestPOST("http://localhost:8000/devices/edit/",this, newInfo);
+        }
+        
+        // Boton de confirmar el nuevo dispositivo
+        var editConfirmBtn = document.getElementById("btn-confirm-edit");
+        editConfirmBtn.addEventListener("click",editDevHandler);    
+
+        // Mostrar  modal
+        modal.style.display = "block";
+    }
+
 
     public newDeviceForm(ev:Event){
         // Conjunto de operaciones para agregar un nuevo dispositivo
@@ -114,8 +186,7 @@ class Main implements EventListenerObject, HandlerPost{
         cancel.addEventListener("click", ()=>{modal.style.display= "none";
                                             nameField.value = "";
                                             descField.value = "";
-                                            //window.location.replace("http://localhost:8000/");
-                                            })
+        })
         
         // Post para agregar el dispositivo
         var addDevHandler= (ev:Event)=>{
@@ -173,20 +244,21 @@ class Main implements EventListenerObject, HandlerPost{
     }
     
     responsePost(status: number, response: string) {
-        if (response == "eliminado" || response== "agregado") {
+        if (response == "backend-ok") {
         window.location.replace('http://localhost:8000/');
         }else {
         console.log("std resp")
         }
     }
+
 }
 
 window.addEventListener("load", ()=> {
     let miObjMain: Main = new Main();
     miObjMain.initPageApp();
-
-    // To be implemented -- 
-    //let switchAllDisp: HTMLElement = miObjMain.mf.getElementById("btn-all-devices");
-    //switchAllDisp.addEventListener("dblclick", ()=>{console.log("funcion no implementada")});
-
+    let all_off = document.getElementById("btn-alldev-off");
+    all_off.addEventListener("click",miObjMain)
+    let all_on = document.getElementById("btn-alldev-on");
+    all_on.addEventListener("click",miObjMain)
 });
+
