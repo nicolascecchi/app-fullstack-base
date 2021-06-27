@@ -121,11 +121,11 @@ class Main implements EventListenerObject, HandlerPost{
     public allDevState(ev:Event){
         var on_off = ev.target["id"].split('-')[2];
         if (on_off == "off"){
-            let state = {"state":"0"} 
+            let state = {"state":false} 
             this.mf.requestPOST("/devices/all",this,state)
         }else if (on_off == "on"){
             console.log(on_off)
-            let state = {"state":"1"} 
+            let state = {"state":true} 
             this.mf.requestPOST("/devices/all",this,state)
         }else{
             console.log("Error")
