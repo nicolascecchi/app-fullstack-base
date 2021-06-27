@@ -193,7 +193,7 @@ class Main implements EventListenerObject, HandlerPost{
             let devName:string = nameField.value;
             let devDesc:string = descField.value;
             let devType:string = typeField.value;
-            let newDevice = {"name":devName, "description":devDesc, "state":"0", "type":devType}
+            let newDevice = {"name":devName, "description":devDesc, "state":false, "type":devType}
             this.mf.requestPOST("http://localhost:8000/devices/add/",this,newDevice);
         }
         
