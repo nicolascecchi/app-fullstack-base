@@ -1,7 +1,6 @@
 //=======[ Settings, Imports & Data ]==========================================
 
 var PORT = 3000;
-const fs = require('fs');
 var express = require('express');
 var app = express();
 var utils = require('./mysql-connector');
@@ -17,8 +16,8 @@ const { RSA_NO_PADDING } = require('constants');
 
 //Ejercicio 4
 app.get('/devices/', function(req, res) {
-    //res.send(datos);
     res.json(datos);
+    res.send("backend-ok");
 });
 
 //Ejercicio 5
@@ -48,7 +47,7 @@ app.post('/devices/delete/', function(req,res){
 
 });
 
-
+// Agregar nuevo dispositivo
 app.post('/devices/add/', function(req,res){
     // Crea nuevo id en 1
     let newId = 1;
@@ -71,6 +70,7 @@ app.post('/devices/add/', function(req,res){
     res.send('backend-ok')
 })
 
+// Edita dispositivo
 app.post('/devices/edit/', function(req,res){
     let datosFiltrados = datos.filter(item => item.id == req.body.id);
     if (datosFiltrados.length > 0) {
@@ -81,6 +81,7 @@ app.post('/devices/edit/', function(req,res){
     res.send('backend-ok')
 })
 
+// Prende/Apagar todos los dispositivos
 app.post('/devices/all', function(req,res){
     datos.forEach(element => {
         element.state = req.body.state;

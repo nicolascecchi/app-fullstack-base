@@ -34,8 +34,7 @@ main {
 .btn-cancelar:hover{
   background: rgba(184, 16, 16, 0.685);
 }
-
- /* The Modal (background) */
+ /* Modal */
  .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

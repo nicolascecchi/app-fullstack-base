@@ -247,7 +247,7 @@ class Main implements EventListenerObject, HandlerPost{
         if (response == "backend-ok") {
         window.location.replace('http://localhost:8000/');
         }else {
-        console.log("std resp")
+        console.log("Respuesta recibida. No requiere acciones.");
         }
     }
 
