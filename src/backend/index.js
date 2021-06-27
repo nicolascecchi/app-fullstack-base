@@ -21,9 +21,6 @@ app.get('/devices/', function(req, res) {
     res.json(datos);
 });
 
-
-
-
 //Ejercicio 5
 //Espera una consulta al endpoint EJ /devices/1
 //Parámetro id = el id del dispositivo a buscar
@@ -40,8 +37,6 @@ app.post('/devices/', function(req, res) {
     if (datosFiltrados.length > 0) {
         datosFiltrados[0].state = req.body.state;
     }
-    //res.json(datosFiltrados);
-    res.send("Todo ok");
 });
 
 
@@ -53,6 +48,28 @@ app.post('/devices/delete/', function(req,res){
 
 });
 
+
+app.post('/devices/add/', function(req,res){
+    // Crea nuevo id en 1
+    let newId = 1;
+    // Ids usados por otros dispositivos
+    let usedIds = [];
+    datos.forEach(element => {
+        usedIds.push(element.id)
+    });
+    // Aumenta en 1 el id hasta encontrar uno sin usar
+    while (usedIds.includes(newId)){
+        newId += 1;
+    }
+    
+    // Agrega el nuevo dispositivo al JSON datos
+    datos.push({"id":newId,
+                 "name":req.body.name,
+                 "description":req.body.description,
+                 "state":req.body.state
+                    })
+    res.send('agregado')
+})
 
 //=======[ Main module code ]==================================================
 app.listen(PORT, function(req, res) {

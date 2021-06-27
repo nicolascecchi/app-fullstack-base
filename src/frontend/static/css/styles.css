@@ -20,11 +20,17 @@ main {
     font-size: 25px;
     color: rgb(161, 48, 48);
 }
-.agregar-disp{
-  background-color: rgb(28, 189, 28);
+/*.agregar-disp{
+  background-color: rgb(47, 180, 47);
+}*/
+.btn-delete-device:hover{
+  background-color: #ff3527ce;
 }
-.btn-delete-device{
-  background-color: #f44336;
+.btn-confirmar:hover{
+  background: rgba(9, 161, 9, 0.753);
+}
+.btn-cancelar:hover{
+  background: rgba(184, 16, 16, 0.685);
 }
 
  /* The Modal (background) */
@@ -35,10 +41,7 @@ main {
     left: 0;
     top: 25%;
     width: 20%; 
-    height: 48%; 
-    /*overflow: auto;  Enable scroll if needed */
-    /*background-color: rgb(0,0,0); /* Fallback color */
-    /*background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    height: auto; 
   }
 
   .modal-delete-device{
@@ -48,7 +51,7 @@ main {
     left: 0;
     top: 25%;
     width: 25%; 
-    height: 25%; 
+    height: auto; 
   }
   
   /* Modal Content/Box */

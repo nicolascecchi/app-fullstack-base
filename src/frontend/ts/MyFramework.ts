@@ -12,10 +12,6 @@ class MyFramework implements HandlerPost{
     return document.getElementById(id);
   }
 
-  public noHaceNada(){
-    console.log("No hace nada");
-  }
-
   public requestPOST(url: string, response: HandlerPost, datos: any) {
     let xlm: XMLHttpRequest = new XMLHttpRequest();
 
@@ -28,39 +24,6 @@ class MyFramework implements HandlerPost{
     xlm.setRequestHeader("Content-Type", "application/json");
     xlm.send(JSON.stringify(datos));
   }
-
-  public editDeviceForm(id:string) {
-  }
- 
-  public newDeviceForm(){
-    console.log("Esto se ejecutó en modal");
-    // Get the modal
-    var modal = document.getElementById("modal-new-device");
-    // Get the button that opens the modal
-    var btn = document.getElementById("agregar-disp");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    // When the user clicks on the button, open the modal
-    modal.style.display = "block";
-
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  }
-
-
-
-
-
-
-
-  public closeModal(modal:HTMLElement){
-    modal.style.display= "none";
-  }
-
-
 
 
 }

@@ -13,7 +13,7 @@
                 <div class="nav-wrapper">
                     <a href="#!" class="brand-logo left" style="margin-left: 15px;">Smart Home</a>
                     <ul id="nav-mobile" class="right" style="margin-right: 15px;">
-                        <li><a href="#">Help</a></li>
+                        <li><a id="btn-help" href="#">Help</a></li>
                     </ul>
                 </div>
             </nav>	
@@ -25,15 +25,30 @@
                 <div class="row">
                     <div class="col l4 s12 m6">
                      <!-- Modal Trigger Agregar dispositivo -->
-                    <a id="btn-agregar-disp" class="waves-effect waves-light btn agregar-disp" href="#modal1">
-                        <i class="material-icons right">add</i>Agregar Dispositivo</a>
+                    <a id="btn-agregar-disp" class="waves-effect waves-light btn">
+                        <i id="btn-agregar-disp" class="material-icons right">add</i>Agregar Dispositivo</a>
                     </div>
-                    <!-- Switch todos los dispositivos-->
+                    <!-- Switch todos los dispositivos
                     <div class="col l4 s12 m6">
-                        <a id="btn-all-devices" class="waves-effect waves-light btn right">Apagar todo</a>
-                    </div>
+                        <a id="btn-apagar-todo" class="waves-effect waves-light btn right">Apagar todo</a>
+                    </div>-->
                 </div> 
                 <!-- Fin de la primera fila de botones-->
+                
+                <!-- Modal de ayuda -->
+                <div id="modal-help" class="modal">
+                    <div class="modal-content">
+                        <h3>Ayuda</h3>
+                    </div>
+                    <div>
+
+                    </div>
+                
+                    <div class="modal-footer">
+                        <a id="cancelar-help" class="waves-effect waves-light btn">Cerrar</a>
+                    </div>
+                </div> 
+                <!-- Fin modal de ayuda -->
 
                 <!-- Modal para eliminar un dispositivo-->
                 <div id="modal-eliminar" class="modal modal-delete-device">
@@ -42,13 +57,13 @@
                     </div>
                 
                     <div class="modal-footer">
-                        <a id="confirma-eliminar" class="waves-effect waves-light btn">Confirmar</a>
-                        <a id="cancela-eliminar" class="waves-effect waves-light btn">Cancelar</a>
+                        <a id="cancela-eliminar" class="waves-effect waves-light btn btn-cancelar">Cancelar</a>
+                        <a id="confirma-eliminar" class="waves-effect waves-light btn btn-confirmar">Confirmar</a>
                     </div>
                 </div> 
                  <!--Fin modal eliminar -->
 
-                <!-- Modal Structure para agregar nuevo dispositivo -->
+                <!-- Modal para agregar nuevo dispositivo -->
                 <div id="modal-new-device" class="modal">
                     <div class="modal-content">
                         <h5>Agregar nuevo dispositivo</h5>
@@ -57,26 +72,24 @@
                             <form class="col s12">
                                 <div class="row">     
                                     <p>
-                                        <label>
-                                            <input name="group1" type="radio" checked />
-                                            <span>Iluminación</span>
-                                        </label>
-                                        <label>
-                                            <input name="group1" type="radio" />
-                                            <span>Persiana</span>
-                                            </label>
+                                        <select class="browser-default" id="devType">
+                                            <option value="" disabled selected>Tipo de dispositivo</option>
+                                            <option value=0>Iluminación</option>
+                                            <option value=1>Persiana</option>
+                                        </select>
+                                                  
                                     </p>
                                 </div>                            
                                 <div class="row">
                                     <div class="input-field col s10">
-                                        <input placeholder="Ej. Lámpara 1" id="name" type="text" class="validate">
-                                        <label for="name">Nombre del dispositivo</label>
+                                        <input placeholder="Ej. Lámpara 1" id="dev-name" type="text" class="validate">
+                                        <label for="name">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="row"> 
                                     <div class="input-field col s10">
                                         <input placeholder="Ej. Lámpara Cocina" id="description" type="text" class="validate">
-                                        <label for="name">Descripción del dispositivo</label>
+                                        <label for="description">Descripción</label>
                                     </div>
                                 </div>
                             </form>
@@ -86,10 +99,12 @@
                     <!-- Botones Enviar/Cancelar del Modal-->
                     <div class="row">
                         <div class="modal-footer">
-                            <a id= "cancelar-nuevo-disp" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
-                            <button class="btn waves-effect green" type="submit" name="action">Enviar
+                            <!--<a id= "cancelar-addDev" class="modal-action modal-close waves-effect waves-red btn-flat">Cancelar</a>
+                            <button class="btn waves-effect green" type="submit" id="btn-confirm-addDev">Enviar
                                 <i class="material-icons right">send</i>
-                            </button>
+                            </button> -->
+                            <a id="cancelar-addDev" class="waves-effect waves-light btn btn-cancelar">Cancelar</a>
+                            <a id="btn-confirm-addDev" class="waves-effect waves-light btn btn-confirmar">Confirmar</a>
                         </div>
                     </div>
                 </div>
