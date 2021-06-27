@@ -209,9 +209,9 @@ class Main implements EventListenerObject, HandlerPost{
         // Toma la checkbox donde se hizo click
         let checkBox: HTMLInputElement = <HTMLInputElement>ev.target;
         // Asigna al dispositivo el estado de la checkbox
-        let datos = {"id":checkBox.id,"status":checkBox.checked};
+        let datos = {"id":checkBox.id.split('-')[1],"state":checkBox.checked};
         // Modifica el estado del dispositivo con método POST
-        this.mf.requestPOST("http://localhost:8000/devices",this,datos);      
+        this.mf.requestPOST("http://localhost:8000/devices/changestate",this,datos);      
     }
 
     // Método del main para eliminar dispositivos

@@ -31,7 +31,7 @@ app.get('/devices/:id', function(req, res) {
 
 //Ejercicio 6
 //Espera recibir {id:1,state:1/0} , impacta el cambio y lo devuelve
-app.post('/devices/', function(req, res) {
+app.post('/devices/changestate', function(req, res) {
     let datosFiltrados = datos.filter(item => item.id == req.body.id);
     if (datosFiltrados.length > 0) {
         datosFiltrados[0].state = req.body.state;
@@ -44,7 +44,6 @@ app.post('/devices/delete/', function(req,res){
     let datosFiltrados = datos.filter(item => item.id != req.body.id);
     datos = datosFiltrados;
     res.send("backend-ok")
-
 });
 
 // Agregar nuevo dispositivo
