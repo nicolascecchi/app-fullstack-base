@@ -7,7 +7,7 @@ Web App Full Stack Base
 
 *Ayudaría mucho si apoyaras este proyecto con una ⭐ en Github!*
 
-Este proyecto es una aplicación web fullstack que se ejecuta sobre el ecosistema `Docker`. Está compuesta por un compilador de `TypeScript` que te permite utilizar este superset de JavaScript para poder programar un `cliente web`. También tiene un servicio en `NodeJS` que te permite ejecutar código en backend y al mismo tiempo disponibilizar el código del cliente web para interactar con el servicio. Además tiene una `base de datos` MySQL que puede interactuar con el backend para guardar y consultar datos, y de manera adicional trae un `administrador` de base de datos para poder administrar la base en caso que lo necesites.
+Este proyecto es una aplicación web fullstack que se ejecuta sobre el ecosistema `Docker`. Está compuesta por un compilador de `TypeScript` que te permite utilizar este superset de JavaScript para poder programar un `cliente web`. También tiene un servicio en `NodeJS` que te permite ejecutar código en backend y al mismo tiempo disponibilizar el código del cliente web para interactar con el servicio. Además tiene una `base de datos` MySQL, pero en esta implementación no fue utilizada.
 
 La aplicación IoT de base que viene con este proyecto se encarga de crear una tabla llamada `Devices` en la base de datos, y la idea es que vos puedas desarrollar el código de backend y frontend que te permita controlar desde el navegador el estado de los devices de un hogar inteligente - *como pueden ser luces, TVs, ventiladores, persianas, enchufes y otros* - y almacenar los estados de cada uno en la base de datos. 
 
@@ -15,7 +15,7 @@ Realizando estas tareas vas a a tener una aplicación fullstack IoT del mundo re
 
 En esta imagen podés ver una posible implementación del cliente web que controla los artefactos del hogar.
 
-![architecture](doc/webapp-example-1.png)
+![architecture](doc/screen.jpg)
 
 ## Comenzando 🚀
 
@@ -38,7 +38,7 @@ Continua con la descarga del código cuando tengas las dependencias instaladas y
 Para descargar el código, lo más conveniente es que realices un `fork` de este proyecto a tu cuenta personal haciendo click en [este link](https://github.com/gotoiot/app-fullstack-base/fork). Una vez que ya tengas el fork a tu cuenta, descargalo con este comando (acordate de poner tu usuario en el link):
 
 ```
-git clone https://github.com/USER/app-fullstack-base.git
+git clone https://github.com/nicolascecchi/app-fullstack-base.git
 ```
 
 > En caso que no tengas una cuenta en Github podes clonar directamente este repo.
@@ -64,6 +64,8 @@ Al crearse la aplicación se ejecutan los contenedores de Docker de cada servici
 <details><summary><b>Lee cómo configurar la aplicación</b></summary><br>
 
 ### Configuración de la DB
+
+En este proyecto particular la BBDD no fue implementada.
 
 Como ya comprobaste, para acceder PHPMyAdmin tenés que ingresar en la URL [localhost:8001/](http://localhost:8001/). En el login del administrador, el usuario para acceder a la db es `root` y contraseña es la variable `MYSQL_ROOT_PASSWORD` del archivo `docker-compose.yml`.
 
@@ -105,9 +107,13 @@ El servicio en **NodeJS** posee distintos endpoints para comunicarse con el clie
 
 ### La base de datos
 
+En este proyecto particular, no se implementa la BBDD con MySQL.
+
 La base de datos se comunica con el servicio de NodeJS y permite almacenar el estado de los dispositivos en la tabla **Devices**. Ejecuta un motor **MySQL versión 5.7** y permite que la comunicación con sus clientes pueda realizarse usando usuario y contraseña en texto plano. En versiones posteriores es necesario brindar claves de acceso, por este motivo la versión 5.7 es bastante utilizada para fases de desarrollo.
 
 ### El administrador de la DB
+
+En este proyecto particular, no se implementa la BBDD con MySQL.
 
 Para esta aplicación se usa **PHPMyAdmin**, que es un administrador de base de datos web muy utilizado y que podés utilizar en caso que quieras realizar operaciones con la base, como crear tablas, modificar columnas, hacer consultas y otras cosas más.
 
@@ -146,8 +152,6 @@ En la siguiente ilustración podés ver cómo está organizado el proyecto para 
 ├── LICENSE.md                  # licencia del proyecto
 ```
 
-> No olvides ir poniendo tus cambios en el archivo `CHANGELOG.md` a medida que avanzas en el proyecto.
-
 </details>
 
 ## Detalles de implementación 💻
@@ -158,38 +162,127 @@ En esta sección podés ver los detalles específicos de funcionamiento del cód
 
 ### Agregar un dispositivo
 
-Completá los pasos para agregar un dispositivo desde el cliente web.
+Para agregar un dispositivo nuevo debe hacerse click en el botón AGREGAR ![agregardisp](doc/agrega-dispositivo.png) y se abrirá el formulario:
+![formulario-agregar](doc/formulario-agregar.png)
+
+Donde se puede seleccionar el tipo de dispositivo (Actualmente: Iluminación o Persiana), agregar un nombre y su descripción. Todos los dispositivos se agregan por default en estado "off", es decir, apagados. 
+
+### Apagar/Encender todo
+
+Se incorporan las funcionalidades de Apagar/Encender todo con dos botones de power ![allonoff](doc/apagar-encender-todo.png).
+
+### Funcionalidades a nivel dispositivo
+
+En la página se carga una lista de dispositivos
+
+![lista-dispositivos](doc/lista-dispositivos.png)
+
+Donde se muestran todos los dispositivos agregados, su estado, nombre y descripción. A nivel dispositivo hay diferentes funcionalidades, que se enumeran a continuación. 
+
+#### Editar un dispositivo
+
+Al hacer click en el botón de editar dispositivo ![edit](doc/edit.png) se abrirá el formulario:
+
+![formulario-editar](doc/formulario-editar.png)
+
+Donde puede modificarse el nombre y descripción del dispositivo. Al presionar Confirmar, los cambios se impactan en el backend, si se cancela, nada cambia. 
+El estado del dispositivo se puede modificar con el switch y el "tipo" no es modificable. 
+
+#### Switch del dispositivo
+
+El switch ![switch](doc/switch.png) permite cambiar el estado del dispositivo de encendido a apagado, o al revés. 
+
+#### Eliminar dispositivo
+
+El botón de eliminar dispositivo ![delete](doc/delete.png) abre una ventana consultando al usuario si confirma la eliminación del dispositivo. 
+
+![confirma-delete](doc/confirma-delete.png)
+
+Al presionar "Confirmar" se elimina el dispositivo, o se puede Cancelar la operación. 
 
 ### Frontend
 
-Completá todos los detalles sobre cómo armaste el frontend, sus interacciones, etc.
+El front-end está diseñado como una Single Page Application y se hace uso de los Modals para generar las diferentes ventanas de diálogo mostradas previamente. 
+La parte **estática** se maneja utilizando MaterializeCSS implemetando instancias de **collection** para listar los elementos, y mucho uso de **botones** con diferentes funciones. 
+La parte **dinámica** se implementa usando TypeScript, agregando funcionalidades a los botones con **event listeners**. 
+Estructuralmente, se cuenta con una **clase "Main"** que contiene los principales métodos utilizados para el funcionamiento de la aplicación. Implementa **HandleEvent**, un eventHandler genérico que hace de "distribuidor" llamando a los diferentes métodos específicos según el **target** que dispara el evento en la aplicación. 
+Los métodos específicos implementados son:
+
+* allDevState: Que controla el swtich de todos los dispositivos al mismo tiempo. 
+* editDevConfirm: Para manejar la edición de dispositivos.
+* newDeviceForm: Para agregar nuevos dispositivos. 
+* changeDevState: Para controlar el estado de un dispositivo individual.
+* delDevConfirm: Para eliminar un dispositivo.
+* Response Post: Es un método para actualizar la página cuando recibe la respuesta desde el backend, indicando que el método post (por alguno de los eventos anteriores) generó el cambio deseado. 
+
+Finalmente, la clase **Main** tiene también un método **initPageApp** que carga por primera vez la página y agrega muchos de los eventListeners mencionados. 
+
+Existe también una clase **MyFramework** donde se implementan métodos como: 
+* getElementsByClassName
+* getElementById
+* requestPOST: Que implementa la comunicación por POST con el backend.
 
 ### Backend
 
-Completá todos los detalles de funcionamiento sobre el backend, sus interacciones con el cliente web, la base de datos, etc.
+El backend, como se mencionó previamente, se implementado usando nodeJS y ExpressJS, no haciendo uso de la base de datos MySQL.
+
 
 <details><summary><b>Ver los endpoints disponibles</b></summary><br>
 
-Completá todos los endpoints del backend con los metodos disponibles, los headers y body que recibe, lo que devuelve, ejemplos, etc.
-
 1) Devolver el estado de los dispositivos.
 
-```json
-{
-    "method": "get",
-    "request_headers": "application/json",
-    "request_body": "",
-    "response_code": 200,
-    "request_body": {
-        "devices": [
-            {
-                "id": 1,
-                "status": true,
-                "description": "Kitchen light"
-            }
-        ]
-    },
-}
+```
+endpoint: /devices/
+método: get
+req:
+res: json con los dispositivos
+``` 
+2) Consulta de un dispositivo particular
+```
+endpoint: /devices/:id
+método: get
+req: id
+res: json el dispositivo del id correspondiente
+``` 
+3) Cambiar el estado de un dispositivo
+```
+endpoint: /devices/changestate
+método: post
+req: {id, state}
+back-end: Cambia el estado del dispositivo :id
+res: NotImplemented
+``` 
+4) Eliminar dispositivo
+```
+endpoint: /devices/delete/
+método: post
+req: {id}
+backend: Eliminar dispositivo por :id
+res: "backend-ok"
+``` 
+5) Agregar dispositivo
+```
+endpoint: /devices/add/
+método: post
+req: {name, description, type}
+backend: Agrega el dispositivo con los parámetros del body. El estado deault es False y se asigna el primer id disponible.
+res: "backend-ok"
+``` 
+6) Editar dispositivo:
+```
+endpoint: /devices/edit/
+método: post
+req: {id, name, description}
+backend: Cambia nombre y descripción del dispositivo con :id.
+res: "backend-ok"
+``` 
+7) Apagar/Encender todos los dispositivos
+```
+endpoint: /devices/all
+método: post
+req: {state}
+backend: Cambia todos los dispotivos a estado :state
+res: "backend-ok"
 ``` 
 
 </details>
