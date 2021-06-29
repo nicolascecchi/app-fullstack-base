@@ -162,7 +162,7 @@ En esta sección podés ver los detalles específicos de funcionamiento del cód
 
 ### Agregar un dispositivo
 
-Para agregar un dispositivo nuevo debe hacerse click en el botón AGREGAR ![agregardisp](doc/agrega-dispositivo.png) y se abrirá el formulario:
+Para agregar un dispositivo nuevo debe hacerse click en el botón AGREGAR ![agregardisp](doc/agregar-dispositivo.png) y se abrirá el formulario:
 ![formulario-agregar](doc/formulario-agregar.png)
 
 Donde se puede seleccionar el tipo de dispositivo (Actualmente: Iluminación o Persiana), agregar un nombre y su descripción. Todos los dispositivos se agregan por default en estado "off", es decir, apagados. 
